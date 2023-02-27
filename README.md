@@ -1,19 +1,5 @@
-# kaput-ui
+# UI for Kaput using Vue.js
 
-## Project setup
-```
-npm install
-```
+Tried Angular, now trying Vue.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+To run locally, `npm install` then `npm run serve`.
