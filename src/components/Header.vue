@@ -2,8 +2,8 @@
 <header>
     <nav>
         <ul>
-            <li>Job Applications</li>
-            <li>Account</li>
+            <li><a href="#">Job Applications</a></li>
+            <li><a href="#">Account</a></li>
         </ul>
     </nav>
 </header>
@@ -40,6 +40,11 @@ ul {
 li {
     padding: 0 2rem;
     font-weight: 700;
+}
+
+li > a {
+
+    color: black;
 }
 
 </style>

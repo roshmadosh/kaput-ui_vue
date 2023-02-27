@@ -20,3 +20,20 @@ ul, ol {
     list-style: none;
 }
 
+a {
+    text-decoration: none;
+}
+
+button {
+    padding: 0.5ch 2ch;
+    cursor: pointer;
+}
+input[type="text"], input[type="password"] {
+    padding: 0.5ch 1ch;
+}
+input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.75rem;
+}
+
