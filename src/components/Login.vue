@@ -2,6 +2,7 @@
     <div class="space-block"></div>
     <div class="page">
        <form>
+        <h1 class="form-header">Login</h1>
         <div class="form-group text-group">
             <label for="email">Email</label>
             <input type="text" required v-model="email"/>
@@ -44,34 +45,7 @@ export default {
 </script>
 
 <style scoped>
-.space-block {
-    height: 4em;
-}
-
-form {
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-top: 6em;
-    padding: 3em 5em;
-    margin: auto;
-    width: fit-content;
-}    
-
-.form-group {
-    margin-bottom: 2rem;
-}
-
-.text-group {
-    display: flex;
-    flex-direction: column;
-    width: 32ch;
-}
-
-.checkbox-group > label {
-    position: relative;
-    bottom: 2px;
-}
-
+    
 .button-group {
     position: relative;
     top: 1em;
