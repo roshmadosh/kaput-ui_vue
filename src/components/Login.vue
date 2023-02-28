@@ -4,21 +4,21 @@
        <form>
         <div class="form-group text-group">
             <label for="email">Email</label>
-            <input type="text" />
+            <input type="text" required v-model="email"/>
         </div>
         <div class="form-group text-group">
             <label for="password">Password</label>
-            <input type="password" />
+            <input type="password" required v-model="password"/>
         </div>
         <div class="form-group">
             <a href="#">Not a user? Register here.</a>
         </div>
         <div class="form-group checkbox-group">
-            <input type="checkbox" name="remember-me" id="remember-me">
+            <input type="checkbox" name="remember-me" id="remember-me" v-model="isRemembered">
             <label for="remember-me">Remember me</label>
         </div>
         <div class="form-group button-group">
-            <button type="submit">Login</button>
+            <button type="submit" @click.prevent="onSubmit">Login</button>
         </div>
        </form> 
     </div>
@@ -26,7 +26,19 @@
 
 <script>
 export default {
-    name: 'Login'
+    name: 'Login',
+    data() {
+        return {
+            email: '',
+            password: '',
+            isRemembered: false,
+        }
+    },
+    methods: {
+        onSubmit() {
+            console.log(this.email, this.password, this.isRemembered);
+        }
+    }
 
 }
 </script>

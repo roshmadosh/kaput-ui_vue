@@ -39,7 +39,7 @@ ul {
 
 li {
     padding: 0 2rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 li > a {
