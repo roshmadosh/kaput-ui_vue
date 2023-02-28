@@ -1,4 +1,5 @@
 <template>
+    <div class="space-block"></div>
     <div id="register-form" class="page">
         <form>
             <h1 class="form-header">Register</h1>

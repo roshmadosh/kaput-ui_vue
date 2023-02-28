@@ -1,22 +1,17 @@
 <template>
   <Header />
   <main>
-    <!-- <Register /> -->
-    <Login />
+    <router-view />
   </main>
 </template>
 
 <script>
 import Header from './components/Header.vue';
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    Login,
-    Register,
   }
 }
 </script>

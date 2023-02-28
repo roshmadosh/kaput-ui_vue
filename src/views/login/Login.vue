@@ -12,7 +12,7 @@
             <input type="password" required v-model="password"/>
         </div>
         <div class="form-group">
-            <a href="#">Not a user? Register here.</a>
+            <router-link :to="{ name: 'Register' }">Not a user? Register here.</router-link>
         </div>
         <div class="form-group checkbox-group">
             <input type="checkbox" name="remember-me" id="remember-me" v-model="isRemembered">
