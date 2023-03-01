@@ -5,7 +5,13 @@
             <h1 class="form-header">Register</h1>
             <div class="form-group text-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" v-model="email.value">
+                <input 
+                    type="text" 
+                    name="email" 
+                    id="email" 
+                    v-model="email.value"
+                    @blur="_ => { email.isTouched = true } ">
+                <p class="error-message" v-show="email.isTouched && !email.isValid">Email not valid.</p>
             </div>
             <div class="form-group text-group">
                 <label for="password">Password</label>
@@ -46,7 +52,7 @@ export default {
 
             // checks if every field is valid
             this.isFormValid = formFields.map(field => field.isValid).every(bool => bool);
-        } 
+        },
     },
     computed: {
         // required in order to watch a nested field. kinda gross

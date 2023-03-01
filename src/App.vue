@@ -62,4 +62,8 @@ form {
     bottom: 2px;
 }
 
+.error-message {
+  color: red;
+}
+
 </style>

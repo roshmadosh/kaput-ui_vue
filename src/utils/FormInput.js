@@ -5,11 +5,13 @@ export class FormInput {
     label
     value
     isValid
+    isTouched
 
     constructor(label) {
         this.label = label;
         this.value = "";
         this.isValid = false;
+        this.isTouched = false;
     }
 
 }
