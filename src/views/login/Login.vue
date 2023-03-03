@@ -1,15 +1,17 @@
 <template>
     <div class="space-block"></div>
     <div class="page">
-       <form>
+       <form @keyup="validateForm">
         <h1 class="form-header">Login</h1>
         <div class="form-group text-group">
             <label for="email">Email</label>
-            <input type="text" required v-model="email"/>
+            <input type="text" @blur="email.isTouched = true" v-model="email.value"/>
+            <p class="error-message" v-show="email.isTouched && !email.isValid">Please enter a valid email address.</p>
         </div>
         <div class="form-group text-group">
             <label for="password">Password</label>
-            <input type="password" required v-model="password"/>
+            <input type="password" @blur="password.isTouched = true" v-model="password.value"/>
+            <p class="error-message" v-show="password.isTouched && !password.isValid">Password cannot be empty.</p>
         </div>
         <div class="form-group">
             <router-link :to="{ name: 'Register' }">Not a user? Register here.</router-link>
@@ -19,7 +21,7 @@
             <label for="remember-me">Remember me</label>
         </div>
         <div class="form-group button-group">
-            <button type="submit" :disabled="isSubmitting" @click.prevent="onSubmit">Login</button>
+            <button type="submit" :disabled="isSubmitting || !isValidForm" @click.prevent="onSubmit">Login</button>
         </div>
        </form> 
     </div>
@@ -27,20 +29,41 @@
 
 <script>
 import { LoginService } from '@/services/LoginService';
-
+import { FormInput } from '@/utils/FormInput';
+import { FormValidators } from '@/utils/FormValidators';
 const loginService = new LoginService();
 
 export default {
     name: 'Login',
     data() {
         return {
-            email: '',
-            password: '',
+            email: new FormInput('email'), 
+            password: new FormInput('password'), 
+            isValidForm: false,
             isRemembered: false,
             isSubmitting: false,
         }
     },
+    computed: {
+        emailValue() {
+            return this.email.value;
+        },
+        passwordValue() {
+            return this.password.value;
+        }
+    },
+    watch: {
+        emailValue(value) {
+            this.email.isValid = FormValidators.validEmail(value);
+        },
+        passwordValue(value) {
+            this.password.isValid = FormValidators.validPassword(value);
+        },
+    },
     methods: {
+        validateForm() {
+            this.isValidForm = FormValidators.validForm([this.email, this.password]);
+        },
         async onSubmit() {
             this.isSubmitting = true;
             const loginResponse = await loginService.login(this.email, this.password);

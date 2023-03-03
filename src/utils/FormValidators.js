@@ -7,7 +7,11 @@ export class FormValidators {
 	}
 
 	static validPassword(password) {
-		return true;
+		return password.length > 0;
+	}
+
+	static validForm(formInputs) {
+		return formInputs.map(field => field.isValid).every(bool => bool);
 	}
 }
 

@@ -64,6 +64,7 @@ form {
 
 .error-message {
   color: red;
+  margin-top: 1ch;
 }
 
 </style>

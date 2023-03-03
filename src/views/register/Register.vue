@@ -10,7 +10,7 @@
                     name="email" 
                     id="email" 
                     v-model="email.value"
-                    @blur="_ => { email.isTouched = true } ">
+                    @blur="email.isTouched = true">
                 <p class="error-message" v-show="email.isTouched && !email.isValid">Email not valid.</p>
             </div>
             <div class="form-group text-group">
@@ -26,7 +26,7 @@
                 <input type="text" name="lastName" id="lastName">
             </div>
             <div class="form-group button-group">
-                <button type="submit" :disabled="!isFormValid">Register</button>
+                <button type="submit" :disabled="!isValidForm">Register</button>
                 <router-link to='/login'><button>Cancel</button></router-link>
             </div>
         </form>
@@ -43,15 +43,12 @@ export default {
         return {
             email: new FormInput("email"),
             password: new FormInput("password"),
-            isFormValid: false,
+            isValidForm: false,
         }
     },
     methods: {
         validateForm() {
-            const formFields = [this.email, this.password];
-
-            // checks if every field is valid
-            this.isFormValid = formFields.map(field => field.isValid).every(bool => bool);
+            this.isValidForm = FormValidators.validateForm([this.email, this.password]);
         },
     },
     computed: {
