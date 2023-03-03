@@ -19,13 +19,17 @@
             <label for="remember-me">Remember me</label>
         </div>
         <div class="form-group button-group">
-            <button type="submit" @click.prevent="onSubmit">Login</button>
+            <button type="submit" :disabled="isSubmitting" @click.prevent="onSubmit">Login</button>
         </div>
        </form> 
     </div>
 </template>
 
 <script>
+import { LoginService } from '@/services/LoginService';
+
+const loginService = new LoginService();
+
 export default {
     name: 'Login',
     data() {
@@ -33,11 +37,22 @@ export default {
             email: '',
             password: '',
             isRemembered: false,
+            isSubmitting: false,
         }
     },
     methods: {
-        onSubmit() {
-            console.log(this.email, this.password, this.isRemembered);
+        async onSubmit() {
+            this.isSubmitting = true;
+            const loginResponse = await loginService.login(this.email, this.password);
+            this.isSubmitting = false;
+
+            if (loginResponse.status !== 200) {
+                // TODO set toast notification
+                return 
+            }
+
+            // TODO navigate to dashboard
+
         }
     }
 
