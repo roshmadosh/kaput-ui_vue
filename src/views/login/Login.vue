@@ -5,12 +5,12 @@
         <h1 class="form-header">Login</h1>
         <div class="form-group text-group">
             <label for="email">Email</label>
-            <input type="text" @blur="email.isTouched = true" v-model="email.value"/>
+            <input type="text" id='email' @blur="email.isTouched = true" v-model="email.value"/>
             <p class="error-message" v-show="email.isTouched && !email.isValid">Please enter a valid email address.</p>
         </div>
         <div class="form-group text-group">
             <label for="password">Password</label>
-            <input type="password" @blur="password.isTouched = true" v-model="password.value"/>
+            <input type="password" id='password' @blur="password.isTouched = true" v-model="password.value"/>
             <p class="error-message" v-show="password.isTouched && !password.isValid">Password cannot be empty.</p>
         </div>
         <div class="form-group">

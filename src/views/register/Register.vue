@@ -3,27 +3,29 @@
     <div id="register-form" class="page">
         <form @keyup="validateForm">
             <h1 class="form-header">Register</h1>
-            <div class="form-group text-group">
-                <label for="email">Email</label>
-                <input 
-                    type="text" 
-                    name="email" 
-                    id="email" 
-                    v-model="email.value"
-                    @blur="email.isTouched = true">
-                <p class="error-message" v-show="email.isTouched && !email.isValid">Email not valid.</p>
-            </div>
+            <FormGroup
+                type="text"
+                id="email"
+                label="Email"
+                :input="email"
+                errorMessage="Please enter a valid email address."
+            />
             <div class="form-group text-group">
                 <label for="password">Password</label>
-                <input type="text" name="password" id="password" v-model="password.value">
+                <input 
+                    type="text" 
+                    id="password" 
+                    @blur="password.isTouched = true" 
+                    v-model="password.value">
+                <p class="error-message" v-show="password.isTouched && !password.isValid">Password cannot be empty.</p>
             </div>
             <div class="form-group text-group">
                 <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName">
+                <input type="text" required name="firstName" id="firstName">
             </div>
             <div class="form-group text-group">
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName">
+                <input type="text" required name="lastName" id="lastName">
             </div>
             <div class="form-group button-group">
                 <button type="submit" :disabled="!isValidForm">Register</button>
@@ -36,9 +38,13 @@
 <script>
 import { FormValidators } from '@/utils/FormValidators.js';
 import { FormInput } from '@/utils/FormInput';
+import FormGroup from '@/components/FormGroup.vue'
 
 export default {
     name: "Register",
+    components: {
+        FormGroup,
+    },
     data() {
         return {
             email: new FormInput("email"),
@@ -48,7 +54,7 @@ export default {
     },
     methods: {
         validateForm() {
-            this.isValidForm = FormValidators.validateForm([this.email, this.password]);
+            this.isValidForm = FormValidators.validForm([this.email, this.password]);
         },
     },
     computed: {
