@@ -37,8 +37,8 @@ export default {
     name: 'Login',
     data() {
         return {
-            email: new FormInput('email'), 
-            password: new FormInput('password'), 
+            email: new FormInput('email', [FormValidators.validEmail, FormValidators.notEmpty]), 
+            password: new FormInput('password', [FormValidators.notEmpty]), 
             isValidForm: false,
             isRemembered: false,
             isSubmitting: false,
@@ -54,10 +54,10 @@ export default {
     },
     watch: {
         emailValue(value) {
-            this.email.isValid = FormValidators.validEmail(value);
+            this.email.validate(value);
         },
         passwordValue(value) {
-            this.password.isValid = FormValidators.validPassword(value);
+            this.password.validate(value);
         },
     },
     methods: {

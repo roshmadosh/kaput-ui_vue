@@ -6,12 +6,18 @@ export class FormInput {
     value
     isValid
     isTouched
+		validators
 
-    constructor(label) {
+    constructor(label, validators) {
         this.label = label;
         this.value = "";
         this.isValid = false;
         this.isTouched = false;
+				this.validators = validators;
     }
+
+		validate(value) {
+			this.isValid = this.validators.map(validator => validator(this.value)).every(bool => bool);	
+		}
 
 }

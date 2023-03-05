@@ -10,6 +10,27 @@
                 :input="email"
                 errorMessage="Please enter a valid email address."
             />
+            <FormGroup
+                type="text"
+                id="password"
+                label="Password"
+                :input="password"
+                errorMessage="Password cannot be empty."
+            />
+            <FormGroup
+                type="text"
+                id="email"
+                label="Email"
+                :input="email"
+                errorMessage="Please enter a valid email address."
+            />
+            <FormGroup
+                type="text"
+                id="email"
+                label="Email"
+                :input="email"
+                errorMessage="Please enter a valid email address."
+            />
             <div class="form-group text-group">
                 <label for="password">Password</label>
                 <input 
