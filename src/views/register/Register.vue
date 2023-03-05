@@ -19,35 +19,19 @@
             />
             <FormGroup
                 type="text"
-                id="email"
-                label="Email"
-                :input="email"
-                errorMessage="Please enter a valid email address."
+                id="firstName"
+                label="First Name"
+                :input="firstName"
+                errorMessage="First name cannot be empty."
             />
             <FormGroup
                 type="text"
-                id="email"
-                label="Email"
-                :input="email"
-                errorMessage="Please enter a valid email address."
+                id="lastName"
+                label="Last Name"
+                :input="lastName"
+                errorMessage="Last name cannot be empty."
             />
-            <div class="form-group text-group">
-                <label for="password">Password</label>
-                <input 
-                    type="text" 
-                    id="password" 
-                    @blur="password.isTouched = true" 
-                    v-model="password.value">
-                <p class="error-message" v-show="password.isTouched && !password.isValid">Password cannot be empty.</p>
-            </div>
-            <div class="form-group text-group">
-                <label for="firstName">First Name</label>
-                <input type="text" required name="firstName" id="firstName">
-            </div>
-            <div class="form-group text-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" required name="lastName" id="lastName">
-            </div>
+            
             <div class="form-group button-group">
                 <button type="submit" :disabled="!isValidForm">Register</button>
                 <router-link to='/login'><button>Cancel</button></router-link>
@@ -68,14 +52,16 @@ export default {
     },
     data() {
         return {
-            email: new FormInput("email"),
-            password: new FormInput("password"),
+            email: new FormInput("email", [FormValidators.validEmail, FormValidators.notEmpty]),
+            password: new FormInput("password", [FormValidators.notEmpty]),
+            firstName: new FormInput("firstName", [FormValidators.notEmpty]),
+            lastName: new FormInput("lastName", [FormValidators.notEmpty]),
             isValidForm: false,
         }
     },
     methods: {
         validateForm() {
-            this.isValidForm = FormValidators.validForm([this.email, this.password]);
+            this.isValidForm = FormValidators.validForm([this.email, this.password, this.firstName, this.lastName]);
         },
     },
     computed: {
@@ -85,14 +71,26 @@ export default {
         },
         passwordValue() {
             return this.password.value;
-        }
+        },
+        firstNameValue() {
+            return this.firstName.value;
+        },
+        lastNameValue() {
+            return this.lastName.value;
+        },
     },
     watch: {
         emailValue(value) {
-            this.email.isValid = FormValidators.validEmail(value);
+            this.email.validate(value);
         },
         passwordValue(value) {
-            this.password.isValid = FormValidators.validPassword(value);
+            this.password.validate(value);
+        },
+        firstNameValue(value) {
+            this.firstName.validate(value);
+        },
+        lastNameValue(value) {
+            this.lastName.validate(value);
         }
     }
 }
