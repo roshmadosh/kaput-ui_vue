@@ -3,26 +3,20 @@
     <div class="page">
        <form @keyup="validateForm">
         <h1 class="form-header">Login</h1>
-        <div class="form-group text-group">
-            <label for="email">Email</label>
-            <input type="text" id='email' @blur="email.isTouched = true" v-model="email.value"/>
-            <p class="error-message" v-show="email.isTouched && !email.isValid">Please enter a valid email address.</p>
-        </div>
-        <div class="form-group text-group">
-            <label for="password">Password</label>
-            <input type="password" id='password' @blur="password.isTouched = true" v-model="password.value"/>
-            <p class="error-message" v-show="password.isTouched && !password.isValid">Password cannot be empty.</p>
-        </div>
-        <div class="form-group">
-            <router-link :to="{ name: 'Register' }">Not a user? Register here.</router-link>
-        </div>
-        <div class="form-group checkbox-group">
-            <input type="checkbox" name="remember-me" id="remember-me" v-model="isRemembered">
-            <label for="remember-me">Remember me</label>
-        </div>
-        <div class="form-group button-group">
-            <button type="submit" :disabled="isSubmitting || !isValidForm" @click.prevent="onSubmit">Login</button>
-        </div>
+        <FormGroup
+            type="text"
+            id="email"
+            label="Email"
+            :input="email"
+            errorMessage="Please enter a valid email address."
+        />
+        <FormGroup
+            type="text"
+            id="password"
+            label="Password"
+            :input="password"
+            errorMessage="Password cannot be empty."
+        />
        </form> 
     </div>
 </template>
@@ -31,6 +25,8 @@
 import { LoginService } from '@/services/LoginService';
 import { FormInput } from '@/utils/FormInput';
 import { FormValidators } from '@/utils/FormValidators';
+import FormGroup from '@/components/FormGroup.vue';
+
 const loginService = new LoginService();
 
 export default {
@@ -43,6 +39,9 @@ export default {
             isRemembered: false,
             isSubmitting: false,
         }
+    },
+    components: {
+        FormGroup
     },
     computed: {
         emailValue() {
